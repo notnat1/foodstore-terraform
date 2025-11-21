@@ -24,11 +24,11 @@ resource "aws_security_group" "foodstore-instance-sg" {
   }
 
   ingress {
-    description = "Allow SSH from anywhere (for testing, replace with your IP)"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    description     = "Allow SSH only from Bastion"
+    from_port       = 22
+    to_port         = 22
+    protocol        = "tcp"
+    security_groups = [aws_security_group.foodstore-bastion-sg.id] 
   }
 
   egress {

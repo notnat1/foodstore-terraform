@@ -3,7 +3,11 @@ resource "aws_autoscaling_group" "foodstore-asg-tf" {
   desired_capacity    = 1
   max_size            = 3
   min_size            = 1
-  vpc_zone_identifier = [data.terraform_remote_state.vpc.outputs.private_subnet_id]
+  vpc_zone_identifier = [
+    data.terraform_remote_state.vpc.outputs.private_subnet_id,
+    data.terraform_remote_state.vpc.outputs.private_subnet_id2
+  ]
+  # vpc_zone_identifier = [data.terraform_remote_state.vpc.outputs.private_subnet_id]
 
   launch_template {
     id      = aws_launch_template.foodstore-launch-template.id
