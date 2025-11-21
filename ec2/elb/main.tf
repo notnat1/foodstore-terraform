@@ -3,7 +3,10 @@ resource "aws_lb" "foodstore-alb-tf" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.foodstore-lb-sg.id]
-  subnets            = [data.terraform_remote_state.vpc.outputs.public_subnet_id]
+  subnets = [
+    data.terraform_remote_state.vpc.outputs.public_subnet_id, 
+    data.terraform_remote_state.vpc.outputs.public_subnet_id2
+  ]
 
   tags = {
     Name = "foodstore-alb"
